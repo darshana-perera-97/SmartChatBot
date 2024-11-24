@@ -9,14 +9,15 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        border: 1px solid #000;
+        border: none;
+        /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
         transition: all 0.3s ease; /* Smooth transition for resizing */
       }
 
       /* Default size for the icon */
       .iframe-collapsed {
-        width: 210px;
-        height: 160px;
+        width: 80px;
+        height: 80px;
       }
 
       /* Expanded size for the chatbot */
@@ -46,13 +47,6 @@
         } else if (event.data === "close-chatbot") {
           iframe.classList.remove("iframe-expanded");
           iframe.classList.add("iframe-collapsed");
-        }
-
-        // Listen for iframe size updates from the React app
-        if (event.data.iframeSize) {
-          const { iframeSize } = event.data;
-          iframe.style.width = iframeSize.width;
-          iframe.style.height = iframeSize.height;
         }
       });
     </script>
