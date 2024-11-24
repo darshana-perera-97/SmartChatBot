@@ -3,22 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parent Website</title>
+    <title>Dynamic Chatbot</title>
     <style>
       iframe {
         position: fixed;
         bottom: 20px;
         right: 20px;
+        border: none;
+        /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+        transition: all 0.3s ease; /* Smooth transition for resizing */
+      }
+
+      /* Default size for the icon */
+      .iframe-collapsed {
+        width: 80px;
+        height: 80px;
+      }
+
+      /* Expanded size for the chatbot */
+      .iframe-expanded {
         width: 320px;
         height: 450px;
-        border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
     </style>
   </head>
   <body>
     <h1>Welcome to the Parent Website</h1>
-    <!-- Replace the src with your React app's local URL -->
-    <iframe src="http://localhost:3000"></iframe>
+    <iframe
+      id="chatbot-iframe"
+      class="iframe-collapsed"
+      src="http://localhost:3000"
+      title="Chatbot"
+    ></iframe>
+
+    <script>
+      const iframe = document.getElementById("chatbot-iframe");
+
+      // Listen for messages from the chatbot to toggle size
+      window.addEventListener("message", (event) => {
+        if (event.data === "open-chatbot") {
+          iframe.classList.remove("iframe-collapsed");
+          iframe.classList.add("iframe-expanded");
+        } else if (event.data === "close-chatbot") {
+          iframe.classList.remove("iframe-expanded");
+          iframe.classList.add("iframe-collapsed");
+        }
+      });
+    </script>
   </body>
 </html>
